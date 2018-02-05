@@ -10,7 +10,8 @@ class App extends React.Component {
     task: '',
     hours: '',
     pTotal: 0,
-    wTotal: 0
+    wTotal: 0,
+    count: 0
   }
 
   updateProject = event => {
@@ -32,7 +33,8 @@ class App extends React.Component {
         state = {personal: this.state.personal}
         state.personal.push({
           task: this.state.task,
-          hours: this.state.hours
+          hours: this.state.hours,
+          id: this.state.count
         })
         state.pTotal = this.state.pTotal + parseInt(this.state.hours, 10)
         break
@@ -40,7 +42,8 @@ class App extends React.Component {
         state = {work: this.state.work}
         state.work.push({
           task: this.state.task,
-          hours: this.state.hours
+          hours: this.state.hours,
+          id: this.state.count
         })
         state.wTotal = this.state.wTotal + parseInt(this.state.hours, 10)
         break
@@ -48,6 +51,7 @@ class App extends React.Component {
     }
     state.task = ''
     state.hours = ''
+    state.count = this.state.count + 1
     this.setState(state)
   }
 
@@ -75,7 +79,8 @@ class App extends React.Component {
       </Label>
 
       <Label field="Description">
-        <Field tag="input" autofocus
+        <Field tag="input" autoFocus
+          maxLength="18"
           value={this.state.task}
           onChange={this.updateTask}>
         </Field>

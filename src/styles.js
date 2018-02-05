@@ -36,20 +36,27 @@ const StyledList = styled.div`
 
 // ...and then making it a React cmp
 export const List = props => {
+
     let time
     props.time === 1
     ? time = '1 hr.'
     : time = `${props.time} hrs.`
+
     return (
     <StyledList>
+
     {props.time === 0
     ? <h4>{props.category}</h4>
     : <h4>{props.category} ({time})</h4>}
-    {props.list.map(item =>
-    item.hours < 2
-    ? <p>{item.task} ({item.hours} hr.)</p>
-    : <p>{item.task} ({item.hours} hrs.)</p>
+
+    {props.list
+    .sort((a, b) => a.hours - b.hours)
+    .reverse()
+    .map(item => item.hours < 2
+    ? <p key={item.id}>- {item.task} ({item.hours} hr.)</p>
+    : <p key={item.id}>- {item.task} ({item.hours} hrs.)</p>
     )}
+    
     </StyledList>
     )
 }
