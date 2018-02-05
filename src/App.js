@@ -52,6 +52,13 @@ class App extends React.Component {
   }
 
   render() {
+
+    let invalid
+    this.state.task.length < 4
+    || this.state.hours === ''
+    || this.state.project === ''
+    ? invalid = true : invalid = false
+
     return (
     <div>
 
@@ -70,25 +77,41 @@ class App extends React.Component {
       <Label field="Description">
         <Field tag="input" autofocus
           value={this.state.task}
-          onChange={this.updateTask}/>
+          onChange={this.updateTask}>
+        </Field>
       </Label>
 
       <Label field="Hours">
         <Field tag="input"
           sm="true" type="number" min="1"
           value={this.state.hours}
-          onChange={this.updateHours}/>
+          onChange={this.updateHours}>
+        </Field>
       </Label>
 
-      <Field tag="button" btn="true" sm="true"
-        style={{marginLeft: 160}}
-        onClick={this.addItem}>Add to List</Field>
+      {invalid
+      ? <Field tag="button" btn="true" sm="true" disabled
+        style={{
+          marginLeft: 160,
+          backgroundColor: 'gray',
+          border: '2px solid gray'
+        }}>Add to List</Field>
+      : <Field tag="button" btn="true" sm="true"
+        style={{marginLeft: 160}} onClick={this.addItem}
+        >Add to List</Field>
+      }
 
       <hr style={{border: '1px solid darkred', margin: 25}}/>
 
       <div style={{display: 'flex'}}>
-        <List category="Personal" time={this.state.pTotal} list={this.state.personal}/>
-        <List category="Work" time={this.state.wTotal} list={this.state.work}/>
+        <List category="Personal"
+          time={this.state.pTotal}
+          list={this.state.personal}>
+        </List>
+        <List category="Work"
+          time={this.state.wTotal}
+          list={this.state.work}>
+        </List>
       </div>
       
     </div>

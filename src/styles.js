@@ -17,12 +17,12 @@ export const Field = styled(({tag, children, ...props}) =>
     border: 2px solid darkred;
     border-radius: 10px;
     height: 40px;
+    outline: none;
     text-align: ${props => props.btn ? 'center' : 'left'};
     font-size: ${props => props.btn ? '16px' : '20px'};
     width: ${props => props.sm ? '120px' : '200px'};
     color: ${props => props.btn ? 'white' : 'darkred'};
     background-color: ${props => props.btn ? 'darkred' : 'white'};
-    outline: none;
 `
 
 // Declaring a styled-cmp...
